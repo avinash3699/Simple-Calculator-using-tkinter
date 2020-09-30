@@ -4,100 +4,296 @@
 from tkinter import *
 
 # creating a GUI window
-window = Tk()
 
-# restricting the user to change the dimensions of the window using 'resizable' method
-window.resizable(width=FALSE, height=FALSE)
+import math
 
-# setting the title of GUI window from default to 'Simple Calculator using tkinter' using 'title' method
-window.title("Simple Calculator using tkinter")
 
-# setting the background color using 'configure' method
-window.configure(background = "#000000")
+def click(event):
+    global scvalue
+    text = event.widget.cget("text")
+    if text == "=":
+        if scvalue.get().isdigit():
+            value = int(scvalue.get())
 
-# global declaration of 'expression' variable
-expression = ""
+        # elif ((scvalue.get()).count("pow") > 0):
 
-# function executed when buttons other than 'equal to' and 'clear' is clicked
-def clicked(number):
-	global expression
-	expression += number
-	equation.set(expression)
 
-# function to clear the input field
-def clear_input_field():
- 	equation.set("")
- 	global expression
- 	expression = ""
+        else:
+            try:
+                value = eval(screen.get())
 
-#function to calculate the final expression
-def calculate():
-	global expression
+            except Exception as e:
+                print(e)
+                value = "Error"
+        
 
-	try:
 
-		# converting an operand if it starts with 0
-		final_expression = ""
-		for i in expression:
-			if i.isdigit(): final_expression += i
-			else:operator=i;final_expression += " "
-		temp = final_expression.split(" ")
-		expression = str(int(temp[0])) + operator + str(int(temp[1]))
-	
-		# calculating the answer using 'eval' function and displaying it
-		result = str(eval(expression))
-		equation.set(result)
-		expression = ""
+        scvalue.set(value)
+        screen.update()
 
-	# handling 'ZeroDivisionError' that arises when second operand is zero while dividing
-	except ZeroDivisionError:
-		equation.set("∞")
+    elif text == "C":
+        scvalue.set("")
+        screen.update()
 
-	except:
-		equation.set("Please Enter a Valid Expression")
+    elif text == "x^2":
+        if scvalue.get().isdigit():
+            val = int(scvalue.get())
 
-equation = StringVar()
-equation.set("Enter the expression")
-input_ = Entry(window, textvariable = equation,bd=0)
-input_.grid(row=0, column=0, columnspan=3)
+            avi = math.pow(val, 2)
+            scvalue.set(avi)
+            screen.update()
+        else:
+            try:
+                value = eval(screen.get())
+                val=int(value)
+            except Exception as e:
+                print(e)
+                value = "Error"
+            avi = math.pow(val,2)
+            scvalue.set(avi)
+            screen.update() 
 
-# creating buttons for numbers, operators and clear(C) using 'Button' function
-button_1 = Button(window, text = '1', command = lambda: clicked('1'), height = 2, width = 5)
-button_2 = Button(window, text = '2', command = lambda: clicked('2'), height = 2, width = 5)
-button_3 = Button(window, text = '3', command = lambda: clicked('3'), height = 2, width = 5)
-button_4 = Button(window, text = '4', command = lambda: clicked('4'), height = 2, width = 5)
-button_5 = Button(window, text = '5', command = lambda: clicked('5'), height = 2, width = 5)
-button_6 = Button(window, text = '6', command = lambda: clicked('6'), height = 2, width = 5)
-button_7 = Button(window, text = '7', command = lambda: clicked('7'), height = 2, width = 5)
-button_8 = Button(window, text = '8', command = lambda: clicked('8'), height = 2, width = 5)
-button_9 = Button(window, text = '9', command = lambda: clicked('9'), height = 2, width = 5)
-button_0 = Button(window, text = '0', command = lambda: clicked('0'), height = 2, width = 5)
-button_sum = Button(window, text = '+', command = lambda: clicked('+'), height = 2, width = 5)
-button_sub = Button(window, text = '-', command = lambda: clicked('-'), height = 2, width = 5)
-button_mul = Button(window, text = '*', command = lambda: clicked('*'), height = 2, width = 5)
-button_div = Button(window, text = '/', command = lambda: clicked('/'), height = 2, width = 5)
-button_equal = Button(window, text = '=', command = lambda: calculate(), height = 2, width = 5)
-button_clear = Button(window, text = 'C', command = lambda: clear_input_field(), height = 2, width = 5)
-button_point = Button(window, text = '.', command = lambda: clicked('.'), height = 2, width = 5)
+    elif text == "x^3":
+        if scvalue.get().isdigit():
+            val = int(scvalue.get())
 
-# displaying the buttons onto the window and placing them using 'grid' method
-button_1.grid(row = 1, column = 0)
-button_2.grid(row = 1, column = 1)
-button_3.grid(row = 1, column = 2)
-button_4.grid(row = 2, column = 0)
-button_5.grid(row = 2, column = 1)
-button_6.grid(row = 2, column = 2)
-button_7.grid(row = 3, column = 0)
-button_8.grid(row = 3, column = 1)
-button_9.grid(row = 3, column = 2)
-button_point.grid(row = 4, column = 0)
-button_0.grid(row = 4, column = 1)
-button_equal.grid(row = 4, column = 2)
-button_sum.grid(row = 1, column = 3)
-button_sub.grid(row = 2, column = 3)
-button_mul.grid(row = 3, column = 3)
-button_div.grid(row = 4, column = 3)
-button_clear.grid(row =0 , column = 3)
+            avi = math.pow(val, 3)
+            scvalue.set(avi)
+            screen.update()
+        else:
+            try:
+                value = eval(screen.get())
+                val = int(value)
+            except Exception as e:
+                print(e)
+                value = "Error"
+            avi = math.pow(val, 3)
+            scvalue.set(avi)
+            screen.update()
 
+    elif text == "sqrt":
+        value = eval(screen.get())
+        nw = math.sqrt(value)
+        # print(nw)
+        scvalue.set(nw)
+        screen.update()
+
+    elif text == "sin":
+        value = eval(screen.get())
+        value1 = math.radians(value)
+        nw = math.sin(value1)
+        # print(nw)
+        scvalue.set(nw)
+        screen.update()
+
+    elif text == "cos":
+        value = eval(screen.get())
+        value1 = math.radians(value)
+        nw = math.cos(value1)
+        # print(nw)
+        scvalue.set(nw)
+        screen.update()
+
+    elif text == "tan":
+        value = eval(screen.get())
+        value1 = math.radians(value)
+        nw = math.tan(value1)
+        # print(nw)
+        scvalue.set(nw)
+        screen.update()
+    
+    elif text == "n!":
+        value = eval(screen.get())
+        nw = math.factorial(value)
+        # print(nw)
+        scvalue.set(nw)
+        screen.update()
+
+    elif text == "pi":
+        value = scvalue.get()
+        v = "3.141592653589"
+        nw= value + v
+        scvalue.set(nw)
+        screen.update()
+       
+
+    elif text == "cut":
+        value = scvalue.get()
+        l = len(value)
+        nw = value[:l-1]
+        scvalue.set(nw)
+        screen.update()
+    
+    elif text == "log":
+        value = eval(screen.get())
+        nw = math.log10(value)
+        # print(nw)
+        scvalue.set(nw)
+        screen.update()
+
+    elif text == "exp":
+        value = eval(screen.get())
+        nw = math.exp(value)
+        # print(nw)
+        scvalue.set(nw)
+        screen.update()
+
+    elif text == "e":
+        value = scvalue.get()
+        v = "2.718281"
+        nw = value + v
+        scvalue.set(nw)
+        screen.update()
+
+    elif text == "log 2":
+        value = eval(screen.get())
+        nw = math.log2(value)
+        # print(nw)
+        scvalue.set(nw)
+        screen.update()
+    
+    elif text == "round":
+        value = eval(screen.get())
+        nw = round(value)
+        # print(nw)
+        scvalue.set(nw)
+        screen.update()  
+
+    elif text == "isin":
+        value = eval(screen.get())
+        nw = math.degrees(math.asin(value))
+        # print(nw)
+        scvalue.set(nw)
+        screen.update()    
+    elif text == "icos":
+        value = eval(screen.get())
+        nw = math.degrees(math.acos(value))
+        # print(nw)
+        scvalue.set(nw)
+        screen.update()    
+    elif text == "itan":
+        value = eval(screen.get())
+        nw = math.degrees(math.atan(value))
+        # print(nw)
+        scvalue.set(nw)
+        screen.update()    
+    elif text == "deg":
+        value = eval(screen.get())
+        nw = math.degrees(value)
+        # print(nw)
+        scvalue.set(nw)
+        screen.update()    
+    elif text == "abs":
+        value = eval(screen.get())
+        nw = math.fabs(value)
+        # print(nw)
+        scvalue.set(nw)
+        screen.update()    
+    elif text == "gamma":
+        value = eval(screen.get())
+        nw = math.gamma(value)
+        # print(nw)
+        scvalue.set(nw)
+        screen.update()    
+
+    elif text=="trunc":
+        value = eval(screen.get())
+        nw = math.trunc(value)
+        # print(nw)
+        scvalue.set(nw)
+        screen.update()  
+
+
+
+    else:
+        scvalue.set(scvalue.get() + text)
+        screen.update()
+
+root = Tk()
+root.minsize(450,395)
+root.maxsize(450,395)
+root.title("avinash's calculator")
+root.configure(bg="darkgrey")
+
+# root.wm_iconbitmap("1.ico")
+
+scvalue = StringVar()
+scvalue.set("")
+screen = Entry(root, textvar=scvalue, font="lucida 13 bold")
+screen.pack(fill=X, ipadx=8,ipady=15, pady=10, padx=10)
+
+def button1(a):
+    b = Button(f, text=""+a, font="lucida 10 bold", height=2,width=8, relief=FLAT, activebackground="darkgrey",bg="lightgrey")
+    b.pack(side=LEFT, padx=1, pady=1)
+    b.bind("<Button-1>", click)
+
+
+def button2(a):
+    b = Button(f, text=""+a, font="lucida 10 bold", height=2, width=8,fg="black",activebackground="burlywood")
+    b.pack(side=LEFT, padx=1, pady=1)
+    b.bind("<Button-1>", click)
+
+f = Frame(root,bg="darkgrey")
+button1("exp")
+button1("x^2")
+button1("sin")
+button1("cos")
+button1("tan")
+button1("rad")
+f.pack()
+
+f = Frame(root,bg="darkgrey")
+button1("isin")
+button1("icos")
+button1("itan")
+button1("deg")
+button1("abs")
+button1("gamma")
+f.pack()
+
+f = Frame(root,bg="darkgrey")
+button1("round")
+button1("log")
+button1("cut")
+button1("C")
+button1("%")
+button1("+")
+f.pack()
+
+f = Frame(root,bg="darkgrey")
+button1("log 2")
+button1("pi")
+button2("9")
+button2("8")
+button2("7")
+button1("-")
+f.pack()
+
+f = Frame(root,bg="darkgrey")
+button1("e")
+button1("n!")
+button2("6")
+button2("5")
+button2("4")
+button1("*")
+f.pack()
+
+f = Frame(root,bg="darkgrey")
+button1("x^3")
+button1("sqrt")
+button2("3")
+button2("2")
+button2("1")
+button1("/")
+f.pack()
+
+f = Frame(root,bg="darkgrey")
+button1("trunc")
+button1("(")
+button1(")")
+button2("0")
+button1(".")
+button1("=")
+f.pack()
 # to start the GUI window, 'mainloop' method is used
-window.mainloop()
+root.mainloop()
