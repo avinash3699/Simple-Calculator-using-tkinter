@@ -1,6 +1,6 @@
 # Simple Calculator using Tkinter
 
-## *Simple Calculator using Tkinter* is a Python Application built using one of the best libraries for GUI in Python **'Tkinter'**. This Calculator has the basic arithmetic operations such as *Addition, Subtraction, Multiplication and Division.*
+### *Simple Calculator using Tkinter* is a Python Application built using one of the best libraries for GUI in Python **'Tkinter'**. This Calculator has the basic arithmetic operations such as *Addition, Subtraction, Multiplication and Division.*
 
 ___
 
